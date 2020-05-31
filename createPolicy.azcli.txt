@@ -1,0 +1,15 @@
+
+The policy definition 'AVS Allowed Images' rule is invalid. The 'field' property 'Microsoft.Vmware/vm-templates.moName' of the policy rule does not exist as an alias under provider 'Microsoft.Vmware'. Please see https://github.com/Azure/azure-policy/blob/master/1-contribution-guide/request-alias.md to request new aliases.
+
+
+# Create the Policy Definition (Subscription scope)
+$ definition=$(az policy definition create --name 'AVS Allowed Images' --display-name 'Approved AVS VM images' --description 'This policy governs the approved AVS VM images' --rules 'avsvmrule.json' --params 'avsparams.json' --mode All)
+
+# Set the scope to a resource group; may also be a subscription or management group
+scope=$(az group show --name 'analyst-demo-pc03-arc')
+
+# Set the Policy Parameter (JSON format)
+policyparam='{ "imageIds": { "value": [ "/subscriptions/79003cad-e368-4304-acbf-3d3aa80978e3/resourceGroups/analyst-demo-pc03-arc/providers/Microsoft.VMware/VirtualMachineTemplates/ubuntu-static", "//subscriptions/79003cad-e368-4304-acbf-3d3aa80978e3/resourceGroups/analyst-demo-pc03-arc/providers/Microsoft.VMware/VirtualMachineTemplates/ubuntu-static/" ] } }'
+
+# Create the Policy Assignment
+assignment=$(az policy assignment create --name 'allowed-custom-images-assignment' --display-name 'Approved VM images Assignment' --scope `echo $scope | jq '.id' -r` --policy `echo $definition | jq '.name' -r` --params "$policyparam")

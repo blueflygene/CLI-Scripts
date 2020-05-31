@@ -1,0 +1,19 @@
+{
+	"if": {
+		"allOf": [
+			{
+				"field": "type",
+				"equals": "Microsoft.Vmvware/vm-templates"
+			},
+			{
+				"not": {
+					"field": "Microsoft.Vmware/vm-templates.moName",
+					"in": "[parameters('CentOS1')]"
+				}
+			}
+		]
+	},
+	"then": {
+		"effect": "deny"
+	}
+}

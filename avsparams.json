@@ -1,0 +1,9 @@
+{
+	"imageIds": {
+		"type": "array",
+		"metadata": {
+			"description": "ubuntu-basic",
+			"displayName": "ubuntu-basic"
+		}
+	}
+}
