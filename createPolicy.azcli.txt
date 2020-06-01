@@ -1,6 +1,5 @@
 
-The policy definition 'AVS Allowed Images' rule is invalid. The 'field' property 'Microsoft.Vmware/vm-templates.moName' of the policy rule does not exist as an alias under provider 'Microsoft.Vmware'. Please see https://github.com/Azure/azure-policy/blob/master/1-contribution-guide/request-alias.md to request new aliases.
-
+--The policy definition 'AVS Allowed Images' rule is invalid. The 'field' property 'Microsoft.Vmware/vm-templates.moName' of --the policy rule does not exist as an alias under provider 'Microsoft.Vmware'. 
 
 # Create the Policy Definition (Subscription scope)
 $ definition=$(az policy definition create --name 'AVS Allowed Images' --display-name 'Approved AVS VM images' --description 'This policy governs the approved AVS VM images' --rules 'avsvmrule.json' --params 'avsparams.json' --mode All)
